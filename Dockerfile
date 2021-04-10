@@ -5,7 +5,7 @@ RUN mvn -f /usr/src/app/pom.xml clean install
 
 FROM openjdk:11
 COPY config.yml /var/queue-consumer/
-COPY target/queue-consumer-1.0-SNAPSHOT.jar /var/queue-consumer/
+COPY --from=build /usr/src/app/target/queue-consumer-1.0-SNAPSHOT.jar /var/queue-consumer/
 EXPOSE 9090
 WORKDIR /var/queue-consumer
 ENV JAVA_TOOL_OPTIONS "-Dcom.sun.management.jmxremote.ssl=false \
