@@ -27,8 +27,6 @@ public class QueueConsumerApplication extends Application<QueueConsumerConfigura
     @Override
     public void run(final QueueConsumerConfiguration configuration,
                     final Environment environment) {
-        // TODO: implement application
-
         var consumer = new SqsConsumer(threadPoolTaskExecutor());
         consumer.startConsuming();
     }
