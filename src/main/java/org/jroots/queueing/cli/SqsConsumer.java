@@ -2,12 +2,9 @@ package org.jroots.queueing.cli;
 
 import com.amazonaws.services.sqs.AmazonSQS;
 import com.amazonaws.services.sqs.AmazonSQSClientBuilder;
-import com.amazonaws.services.sqs.model.ChangeMessageVisibilityRequest;
 import com.amazonaws.services.sqs.model.ReceiveMessageRequest;
-
 import com.codahale.metrics.Meter;
 import com.codahale.metrics.MetricRegistry;
-import com.codahale.metrics.jmx.JmxReporter;
 import io.prometheus.client.CollectorRegistry;
 import io.prometheus.client.Counter;
 import io.prometheus.client.dropwizard.DropwizardExports;
@@ -25,8 +22,7 @@ public class SqsConsumer {
     private final String sqsUrl;
     private final AmazonSQS amazonSQSClient;
     private final MetricRegistry metrics = new MetricRegistry();
-    private final Meter requests = metrics.meter("requests");
-    private final Counter counter = Counter.build().namespace("java").name("requests").help("my counter").register();
+    private final Counter counter = Counter.build().namespace("queue-cluster").name("outgoing-messages").help("my counter").register();
 
     private final Executor executor;
 
@@ -52,7 +48,7 @@ public class SqsConsumer {
             logger.info("===STARTED CONSUMING===");
             while (true) {
                 try {
-                    var request = new ReceiveMessageRequest().withWaitTimeSeconds(20).withQueueUrl(sqsUrl);
+                    var request = new ReceiveMessageRequest().withMaxNumberOfMessages(10).withWaitTimeSeconds(20).withQueueUrl(sqsUrl);
                     var messages = amazonSQSClient.receiveMessage(request).getMessages();
                     logger.info("Made request to SQS");
                     for (var message : messages) {

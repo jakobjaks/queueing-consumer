@@ -12,6 +12,11 @@
                     "hostPort": 9090,
                     "protocol": "tcp",
                     "containerPort": 9090
+                },
+                {
+                    "hostPort": 9091,
+                    "protocol": "tcp",
+                    "containerPort": 9091
                 }
             ],
             "command": null,
@@ -29,7 +34,7 @@
             "memoryReservation": null,
             "volumesFrom": [],
             "stopTimeout": null,
-            "image": "328945660164.dkr.ecr.us-east-1.amazonaws.com/queue-consumer-repo",
+            "image": "328945660164.dkr.ecr.us-east-1.amazonaws.com/queue-consumer-repo:34cd8e63871b29d8ca0151f69a3f4427455ecc22",
             "startTimeout": null,
             "firelensConfiguration": null,
             "dependsOn": null,
@@ -55,7 +60,7 @@
     "compatibilities": [
         "EC2"
     ],
-    "taskDefinitionArn": "arn:aws:ecs:us-east-1:328945660164:task-definition/queue-consumer:1",
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:328945660164:task-definition/queue-consumer:7",
     "family": "queue-consumer",
     "requiresAttributes": [
         {
@@ -83,7 +88,7 @@
     ],
     "networkMode": null,
     "cpu": "1000",
-    "revision": 1,
+    "revision": 7,
     "status": "ACTIVE",
     "inferenceAccelerators": null,
     "proxyConfiguration": null,
