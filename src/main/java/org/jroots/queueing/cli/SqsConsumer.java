@@ -22,7 +22,7 @@ public class SqsConsumer {
     private final String sqsUrl;
     private final AmazonSQS amazonSQSClient;
     private final MetricRegistry metrics = new MetricRegistry();
-    private final Counter counter = Counter.build().namespace("queue-cluster").name("outgoing-messages").help("my counter").register();
+    private final Counter counter = Counter.build().namespace("queue_cluster").name("outgoing_messages").help("my counter").register();
 
     private final Executor executor;
 
